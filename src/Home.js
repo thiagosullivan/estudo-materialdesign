@@ -1,6 +1,21 @@
 import React from 'react'
-import { AppBar, Button, IconButton, makeStyles, Toolbar } from '@material-ui/core';
+import { 
+  AppBar,
+  Button,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Drawer,
+  List,
+  Typography,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AppsIcon from '@material-ui/icons/Apps';
@@ -13,9 +28,18 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     boxShadow: "none",
+    zIndex: theme.zIndex.drawer + 1,
   },
   logo:{
     height: 30,
+  },
+  drawer: {
+    width: 240,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: 240,
+    borderRight: 'none',
   },
   menuIcon: {
     paddingRight: theme.spacing(5),    
@@ -26,8 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  listItemText: {
+    fontSize: 14,
   }
-
 }));
 
 function Home() {
@@ -76,8 +102,40 @@ function Home() {
           </Button>
         </Toolbar>
       </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <Toolbar />
+        <div className={classes.drawerContainer}>
+          <List>
+            <ListItem button>
+              <ListItemIcon>{<Home />}</ListItemIcon>
+              <ListItemText classes={{
+                primary: classes.listItemText,
+              }} primary={'Início'} />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>{<WhatshotIcon />}</ListItemIcon>
+              <ListItemText classes={{
+                primary: classes.listItemText,
+              }} primary={'Em alta'} />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>{<SubscriptionsIcon />}</ListItemIcon>
+              <ListItemText classes={{
+                primary: classes.listItemText,
+              }} primary={'Inscrição'} />
+            </ListItem>
+          </List>
+          <Divider />
+        </div>
+      </Drawer>
     </div>
   )
 }
 
-export default Home
+export default Home;
